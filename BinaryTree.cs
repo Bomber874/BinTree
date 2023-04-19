@@ -88,6 +88,25 @@ namespace BinTree
 
             }
         }
+
+        public bool HasValue(T value)
+        {
+            Stack<BinaryTree<T>> stack = new Stack<BinaryTree<T>>();
+            stack.Push(this);
+            while (stack.Any())
+            {
+                BinaryTree<T> CurTree = stack.Pop();
+                if (value.CompareTo(CurTree.Value) == 0)
+                {
+                    return true;
+                }
+                if (CurTree.Child[1] != null)
+                    stack.Push(CurTree.Child[1]);
+                if (CurTree.Child[0] != null)
+                    stack.Push(CurTree.Child[0]);
+            }
+            return false;
+        }
         public BinaryTree<T> MinRightChild()
         {
             if (Child[1] == null)
